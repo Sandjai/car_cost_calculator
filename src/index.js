@@ -130,6 +130,7 @@ function onMousedown(e) {
       costPercentages = getPersentages("cost");
       document.querySelector(".slider__progress1").style.width =
         costPercentages;
+      changePercentages();
     }
 
     if (e.target.dataset.par === "fee") {
@@ -198,6 +199,7 @@ document.querySelector(".js-cost_show").addEventListener("keyup", (e) => {
     getPersentages("cost");
 
   sumAndPay();
+  changePercentages();
 });
 
 document.querySelector(".js-fee_show").addEventListener("keyup", (e) => {
@@ -267,6 +269,7 @@ document.querySelector(".js-cost").addEventListener("pointerup", (e) => {
     getPersentages("cost");
 
   sumAndPay();
+  changePercentages();
 });
 
 document.querySelector(".js-fee").addEventListener("pointerup", (e) => {
