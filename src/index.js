@@ -31,6 +31,12 @@ function sumAndPay() {
   document.getElementById("js-totalsum").value = sumVal;
   document.getElementById("js-paymonth").value = payVal;
 }
+
+function changePercentages() {
+  document.querySelector(".num-field_persantages").dataset.perc =
+    Math.round((feeCurrent * 100) / costCurrent) + "%";
+}
+
 //Стоимость автомобиля
 const cost = document.querySelector(".js-cost");
 const cost_show = document.querySelector(".js-cost_show");
@@ -131,6 +137,7 @@ function onMousedown(e) {
       feeCurrent = e.target.value;
       feePercentages = getPersentages("fee");
       document.querySelector(".slider__progress2").style.width = feePercentages;
+      changePercentages();
     }
 
     if (e.target.dataset.par === "time") {
@@ -176,20 +183,6 @@ document.getElementById("carleasing_request").onsubmit = (e) => {
   );
 };
 
-// document.querySelector(".js-cost_show").addEventListener("keydown", (e) => {
-//   const val =
-//     e.target.value > costMax
-//       ? costMax
-//       : e.target.value < costMin
-//       ? costMin
-//       : e.target.value(toFixed());
-//   cost.value = val;
-//   cost_show.value = val;
-//   costCurrent = val;
-//   costPercentages = getPersentages("cost");
-//   document.querySelector(".slider__progress1").style.width = costPercentages;
-// });
-
 document.querySelector(".js-cost_show").addEventListener("keyup", (e) => {
   const val =
     e.target.value > costMax
@@ -207,17 +200,13 @@ document.querySelector(".js-cost_show").addEventListener("keyup", (e) => {
   sumAndPay();
 });
 
-document.querySelector(".js-cost_show").addEventListener("change", (e) => {
-  cost_show.value = Number(costCurrent).toLocaleString("ru-RU");
-});
-
 document.querySelector(".js-fee_show").addEventListener("keyup", (e) => {
   const val =
-    e.target.value > feeMax
+    +e.target.value > feeMax
       ? feeMax
-      : e.target.value < feeMin
+      : +e.target.value < feeMin
       ? feeMin
-      : e.target.value;
+      : +e.target.value;
   fee.value = val;
 
   feeCurrent = val;
@@ -226,10 +215,11 @@ document.querySelector(".js-fee_show").addEventListener("keyup", (e) => {
     getPersentages("fee");
 
   sumAndPay();
+  changePercentages();
 });
 
 document.querySelector(".js-time_show").addEventListener("change", (e) => {
-  time_show.value = Number(feeCurrent).toLocaleString("ru-RU");
+  time_show.value = feeCurrent;
 });
 
 document.querySelector(".js-time_show").addEventListener("keyup", (e) => {
@@ -251,4 +241,52 @@ document.querySelector(".js-time_show").addEventListener("keyup", (e) => {
 
 document.querySelector(".js-time_show").addEventListener("change", (e) => {
   time_show.value = timeCurrent;
+});
+
+document.querySelector(".js-cost_show").addEventListener("focus", (e) => {
+  e.target.value = e.target.value.replace(/\s/g, "");
+});
+
+document.querySelector(".js-fee_show").addEventListener("focus", (e) => {
+  e.target.value = e.target.value.replace(/\s/g, "");
+});
+
+document.querySelector(".js-cost_show").addEventListener("blur", (e) => {
+  cost_show.value = Number(costCurrent).toLocaleString("ru-RU");
+});
+
+document.querySelector(".js-fee_show").addEventListener("blur", (e) => {
+  fee_show.value = Number(feeCurrent).toLocaleString("ru-RU");
+});
+
+document.querySelector(".js-cost").addEventListener("pointerup", (e) => {
+  cost_show.value = Number(e.target.value).toLocaleString("ru-RU");
+  costCurrent = e.target.value;
+
+  document.querySelector(".slider__progress1").style.width =
+    getPersentages("cost");
+
+  sumAndPay();
+});
+
+document.querySelector(".js-fee").addEventListener("pointerup", (e) => {
+  fee_show.value = Number(e.target.value).toLocaleString("ru-RU");
+  feeCurrent = e.target.value;
+
+  document.querySelector(".slider__progress2").style.width =
+    getPersentages("fee");
+
+  sumAndPay();
+  changePercentages();
+});
+
+document.querySelector(".js-time").addEventListener("pointerup", (e) => {
+  time_show.value = e.target.value;
+  timeCurrent = e.target.value;
+  pay.innerHTML = Number(getPayCurrent()).toLocaleString("ru-RU") + " ₽";
+
+  document.querySelector(".slider__progress3").style.width =
+    getPersentages("time");
+
+  sumAndPay();
 });
