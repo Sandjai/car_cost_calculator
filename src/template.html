@@ -16,6 +16,8 @@
       </div>
 
       <form id="carleasing_request">
+        <input type="hidden" id="js-totalsum" name="totalsum" value="" />
+        <input type="hidden" id="js-paymonth" name="paymonth" value="" />
         <div class="content__calculator calculator">
           <div class="calculator__item calculator__item1 item">
             <div class="item__title title">Стоимость автомобиля</div>
@@ -71,8 +73,6 @@
                   name="carFee"
                 />
                 <div class="slider__progress slider__progress2"></div>
-                <!--10% - 60% от поля "Стоимость автомобиля"-->
-                <!--При вводе суммы в поле, должен показываться процент, который она составляет от стоимости автомобиля (округлять до целого значения).-->
               </div>
             </div>
           </div>
