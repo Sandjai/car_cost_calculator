@@ -88,3 +88,78 @@ pay.innerHTML = payCurrent + " ₽";
 let sum = document.querySelector(".js-sum");
 
 sum.innerHTML = feeCurrent + timeCurrent * payCurrent + " ₽";
+
+/**
+ * Events *
+ */
+// cost.addEventListener("change", (e) => {
+//   cost_show.value = e.target.value;
+//   costCurrent = e.target.value;
+//   costPercentages = getPersentages("cost");
+//   document.querySelector(".slider__progress1").style.width = costPercentages;
+// });
+
+function onMousedown(e) {
+  document.addEventListener("mousemove", onMouseMove);
+
+  cost.onmouseup = function () {
+    document.removeEventListener("mousemove", onMouseMove);
+    cost.onmouseup = null;
+  };
+
+  function onMouseMove(e) {
+    if (e.target.dataset.par === "cost") {
+      cost_show.value = e.target.value;
+      costCurrent = e.target.value;
+      costPercentages = getPersentages("cost");
+      document.querySelector(".slider__progress1").style.width =
+        costPercentages;
+    }
+
+    if (e.target.dataset.par === "fee") {
+      fee_show.value = e.target.value;
+      feeCurrent = e.target.value;
+      feePercentages = getPersentages("fee");
+      document.querySelector(".slider__progress2").style.width = feePercentages;
+    }
+
+    if (e.target.dataset.par === "time") {
+      time_show.value = e.target.value;
+      timeCurrent = e.target.value;
+      timePercentages = getPersentages("time");
+      document.querySelector(".slider__progress3").style.width =
+        timePercentages;
+    }
+  }
+}
+
+const sliders = document.querySelectorAll(".js-slider");
+
+for (let slider of sliders) {
+  slider.addEventListener("mousedown", (e) => onMousedown(e));
+  slider.ondragstart = function () {
+    return false;
+  };
+}
+
+document.getElementById("carleasing_request").onsubmit = (e) => {
+  e.preventDefault();
+  if (document.getElementById("submitBtn").classList.contains("btn_disabled")) {
+    return;
+  }
+  document.getElementById("submitBtn").classList.remove("btn_enabled");
+  document.getElementById("submitBtn").classList.add("btn_disabled");
+
+  let fData = new FormData(document.getElementById("carleasing_request"));
+
+  const entries = [];
+  for (const pair of fData.entries()) {
+    entries.push([`${pair[0]}, ${pair[1]}`]);
+    console.log(`${pair[0]}, ${pair[1]}`);
+  }
+
+  alert(
+    "Форма отправлена. Вот Ваши данные: " +
+      JSON.stringify(Object.fromEntries(fData.entries()))
+  );
+};

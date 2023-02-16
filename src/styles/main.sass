@@ -162,22 +162,26 @@ body
             border-radius: 50%
 
 .btn
-    color: $white
-    background-color: $orange
-    font-family: Nekst-Black, sans-serif
-    text-align: center
-    border-radius: 40px
-    width: 100%
-    height: 68px
-    line-height: 68px
-    transition: background-color .5s
-    &:hover
-        cursor: pointer
-        background-color: $black
-    &:disabled
-        background-color: $orange40
     &:visited
         background-color: $black
+    & button
+        color: $white
+
+        font-family: Nekst-Black, sans-serif
+        text-align: center
+        border-radius: 40px
+        width: 100%
+        height: 68px
+        line-height: 68px
+        transition: background-color .5s
+        border: none
+    &_enabled
+        background-color: $orange
+        &:hover
+            cursor: pointer
+            background-color: $black
+    &_disabled
+        background-color: $orange40
 
 @media screen and (min-width:1440px)
     body
@@ -195,7 +199,8 @@ body
         row-gap: 44px
 
     .btn
-        font-size: 30px
+        & button
+            font-size: 30px
     .title
         font-size: 16px
 
@@ -215,7 +220,8 @@ body
         column-gap: 32px
         row-gap: 44px
     .btn
-        font-size: 30px
+        & button
+            font-size: 30px
 @media screen and (min-width:768px) and (max-width:1119px)
     .txt_lg
         font-size: 54px
@@ -233,7 +239,8 @@ body
         grid-column: 1/3
     .btn
         max-width: 345px
-        font-size: 30px
+        & button
+            font-size: 30px
 
 @media screen and (min-width:320px) and (max-width:767px)
     .txt_lg
@@ -251,7 +258,8 @@ body
     .title
         font-size: 14px
     .btn
-        font-size: 22px
+        & button
+            font-size: 22px
     .calculator
         grid-template: 1fr/ 280px
         row-gap: 16px
