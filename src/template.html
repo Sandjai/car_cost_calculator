@@ -6,5 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <div class="content">
+      <div class="content__header header">
+        <h1>
+          Рассчитайте стоимость<br />
+          автомобиля в лизинг
+        </h1>
+      </div>
+
+      <div class="content__calculator calculator">
+        <div class="calculator__item calculator__item1 item">
+          <div class="item__title title">Стоимость автомобиля</div>
+
+          <div class="slider-container">
+            <div class="num-field num-field_currrency">
+              <input
+                type="text"
+                class="slider-container__input num-field__input js-cost_show"
+                value=""
+              />
+            </div>
+
+            <div class="slider-container__slider slider">
+              <input
+                class="slider__input js-cost"
+                type="range"
+                min=""
+                max=""
+                value=""
+                step="1"
+              />
+              <div class="slider__progress slider__progress1"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calculator__item calculator__item2 item">
+          <div class="title">Первоначальный взнос</div>
+
+          <div class="slider-container">
+            <div class="num-field num-field_persantages">
+              <input
+                type="text"
+                class="slider-container__input num-field__input js-fee_show"
+                value=""
+              />
+            </div>
+
+            <div class="slider-container__slider slider">
+              <input
+                class="slider__input js-fee"
+                type="range"
+                min=""
+                max=""
+                value=""
+                step="0.1"
+              />
+              <div class="slider__progress slider__progress2"></div>
+              <!--10% - 60% от поля "Стоимость автомобиля"-->
+              <!--При вводе суммы в поле, должен показываться процент, который она составляет от стоимости автомобиля (округлять до целого значения).-->
+            </div>
+          </div>
+        </div>
+
+        <div class="calculator__item calculator__item3 item">
+          <div class="item__title title">
+            Срок лизинга <span id="test"></span>
+          </div>
+
+          <div class="slider-container">
+            <div class="num-field num-field_months">
+              <input
+                type="text"
+                class="slider-container__input num-field__input js-time_show"
+                value=""
+              />
+            </div>
+
+            <div class="slider-container__slider slider">
+              <input
+                class="slider__input js-time"
+                type="range"
+                min=""
+                max=""
+                value=""
+                step="0.1"
+              />
+              <div class="slider__progress slider__progress3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="calculator__item calculator__item4 item">
+          <div class="item__title title">Сумма договора лизинга</div>
+          <div class="item__txt_lg txt_lg js-sum"></div>
+        </div>
+
+        <div class="calculator__item calculator__item5 item">
+          <div class="item__title title">Ежемесячный платеж от</div>
+          <div class="item__txt_lg txt_lg js-pay"></div>
+        </div>
+
+        <div class="calculator__item calculator__item6 item">
+          <div class="item__btn btn btn_primary">Оставить заявку</div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
