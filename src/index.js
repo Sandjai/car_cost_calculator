@@ -116,11 +116,11 @@ sum.innerHTML =
  */
 
 function onMousedown(e) {
-  e.target.addEventListener("mousemove", onMouseMove);
+  e.target.addEventListener("pointermove", onMouseMove);
 
   e.target.onmouseup = function () {
-    e.target.removeEventListener("mousemove", onMouseMove);
-    e.target.onmouseup = null;
+    e.target.removeEventListener("pointermove", onMouseMove);
+    e.target.onpointerup = null;
   };
 
   function onMouseMove(e) {
@@ -157,7 +157,7 @@ function onMousedown(e) {
 const sliders = document.querySelectorAll(".js-slider");
 
 for (let slider of sliders) {
-  slider.addEventListener("mousedown", (e) => onMousedown(e));
+  slider.addEventListener("pointerdown", (e) => onMousedown(e));
   slider.ondragstart = function () {
     return false;
   };
