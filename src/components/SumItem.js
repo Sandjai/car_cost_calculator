@@ -15,13 +15,13 @@ export class SumItem extends CountedValue {
     document.addEventListener("pay/updated", (e) => {
       this.pay = Number(e.detail.value);
 
-      //document.getElementById("js-paymonth").value = e.detail.value;
+      document.getElementById("js-paymonth").value = e.detail.value;
       this.render();
     });
 
-    // document.addEventListener("sum/updated", (e) => {
-    //   document.getElementById("js-totalsum").value = e.detail.value;
-    // });
+    document.addEventListener("sum/updated", (e) => {
+      document.getElementById("js-totalsum").value = e.detail.value;
+    });
 
     document.addEventListener("cost/updated", (e) => {
       this.carCost = +e.detail.value;
