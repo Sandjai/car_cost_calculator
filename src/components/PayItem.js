@@ -3,17 +3,21 @@ import { CountedValue } from "./CountedValue";
 export class PayItem extends CountedValue {
   constructor({ defaultValue, el, carCost, time, fee, feePercent, pay, name }) {
     super({ defaultValue, el, fee, feePercent, carCost, time, pay, name });
-    this.constructor.pay = defaultValue;
+
     this.initPayEvents();
   }
 
   get payCurrent() {
     return (
-      ((this.carCost - this.fee) * (0.05 * Math.pow(1 + 0.05, this.time))) /
-        Math.pow(1 + 0.05, this.time) -
-      1
+      (this.carCost - this.fee) *
+      ((0.05 * Math.pow(1 + 0.05, this.time)) /
+        (Math.pow(1 + 0.05, this.time) - 1))
     ).toFixed(0);
   }
+
+  //   (this.carCost / this.time +
+  //   ((this.carCost - this.fee) * this.feePercent) / 12
+  // ).toFixed(0);
 
   initPayEvents() {
     document.addEventListener("cost/updated", (e) => {
@@ -31,7 +35,7 @@ export class PayItem extends CountedValue {
       this.fee = +e.detail.value;
 
       if (e.detail.feePercent !== null) {
-        this.feePercent = Math.round(+e.detail.feePercent);
+        this.feePercent = (+e.detail.feePercent).toFixed(2);
       }
 
       this.curVal = Number(this.payCurrent);

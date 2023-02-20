@@ -21,14 +21,15 @@ export class CountedValue {
   }
 
   render() {
+    this.curVal = Number(this.curVal).toFixed(0);
     this._trigger(`${this.name}/updated`, {
       value: this.curVal,
     });
 
-    this.el.innerHTML = this.curVal.toLocaleString("ru-RU", {
+    this.el.innerHTML = Number(this.curVal).toLocaleString("ru-RU", {
+      minimumFractionDigits: 0,
       style: "currency",
       currency: "RUB",
-      minimumFractionDigits: 0,
     });
   }
 }

@@ -82,6 +82,8 @@ export class InputItem {
           : e.target.value;
       this.rangeInput.value = val;
       this.curVal = val;
+      this.txtInput.value = val;
+
       this._trigger(`${this.name}/updated`, {
         value: this.curVal,
         feePercent: this.currentFeePercent || null,

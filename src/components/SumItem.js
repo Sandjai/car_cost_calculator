@@ -8,19 +8,20 @@ export class SumItem extends CountedValue {
   }
 
   get sumCurrent() {
-    return (this.fee + this.time * this.pay).toFixed();
+    return this.fee + this.time * this.pay;
   }
 
   initSumEvents() {
     document.addEventListener("pay/updated", (e) => {
-      this.pay = e.detail.value;
-      document.getElementById("js-paymonth").value = e.detail.value;
+      this.pay = Number(e.detail.value);
+
+      //document.getElementById("js-paymonth").value = e.detail.value;
       this.render();
     });
 
-    document.addEventListener("sum/updated", (e) => {
-      document.getElementById("js-totalsum").value = e.detail.value;
-    });
+    // document.addEventListener("sum/updated", (e) => {
+    //   document.getElementById("js-totalsum").value = e.detail.value;
+    // });
 
     document.addEventListener("cost/updated", (e) => {
       this.carCost = +e.detail.value;
@@ -36,7 +37,7 @@ export class SumItem extends CountedValue {
       this.fee = +e.detail.value;
 
       if (e.detail.feePercent != null) {
-        this.feePercent = Math.round(+e.detail.feePercent);
+        this.feePercent = (+e.detail.feePercent).toFixed(2);
       }
       this.curVal = Number(this.sumCurrent);
 
